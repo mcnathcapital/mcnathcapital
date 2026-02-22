@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://mcnathcapital.com/sitemap.xml
+
+# Important pages for crawling
+Allow: /sba-calculator
+Allow: /business-valuation
+Allow: /profit-margin-calculator
+Allow: /dscr-calculator
+Allow: /exit-readiness

@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>McNath Capital Group - America's Business Capital Specialists</title>
+    <meta name="description" content="Free business calculators and capital advisory services. SBA loans, business valuations, and M&A services across NYC, Chicago, Los Angeles, and Miami.">
+    <meta name="keywords" content="SBA loan calculator, business valuation calculator, profit margin calculator, business loans, M&A advisory">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+        }
+        
+        .locations {
+            display: flex;
+            gap: 20px;
+            font-size: 0.9rem;
+            flex-wrap: wrap;
+        }
+        
+        .location {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+        
+        /* Calculator Grid */
+        .calculators {
+            padding: 4rem 0;
+            background: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+        }
+        
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .calculator-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+            border: 1px solid #eee;
+        }
+        
+        .calculator-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .calculator-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .calculator-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+        
+        .calculator-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+        
+        .calc-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .calc-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        /* Calculator Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 15px;
+        }
+        
+        .close:hover {
+            color: #000;
+        }
+        
+        .calc-form {
+            margin-top: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .calculate-btn {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+        
+        .results {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .results h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .result-item {
+            margin: 10px 0;
+            font-size: 18px;
+            font-weight: bold;
+            color: #34495e;
+        }
+        
+        /* Regional Offices */
+        .offices {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+        
+        .office-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .office-card {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .office-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .office-card p {
+            opacity: 0.9;
+        }
+        
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 3rem 0 2rem;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1rem;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #34495e;
+            padding-top: 2rem;
+            margin-top: 2rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .locations {
+                justify-content: center;
+                margin-top: 10px;
+            }
+            
+            .header-content {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">McNath Capital Group</div>
+                <div class="locations">
+                    <div class="location">📍 New York</div>
+                    <div class="location">📍 Chicago</div>
+                    <div class="location">📍 Los Angeles</div>
+                    <div class="location">📍 Miami</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>America's Business Capital Specialists</h1>
+            <p>Free calculators and expert capital advisory from coast to coast</p>
+            <a href="#calculators" class="cta-button">Try Our Free Calculators</a>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section id="calculators" class="calculators">
+        <div class="container">
+            <h2 class="section-title">Free Business Calculators</h2>
+            <p style="text-align: center; font-size: 1.1rem; color: #666; max-width: 800px; margin: 0 auto;">
+                Get instant insights with our professional-grade calculators. Used by thousands of business owners nationwide.
+            </p>
+            
+            <div class="calculator-grid">
+                <div class="calculator-card">
+                    <div class="calculator-icon">💰</div>
+                    <h3>SBA Loan Calculator</h3>
+                    <p>Calculate monthly payments and see if you qualify for SBA financing. Covers 7(a), 504, and microloans.</p>
+                    <button class="calc-button" onclick="openCalculator('sba')">Calculate SBA Loan</button>
+                </div>
+                
+                <div class="calculator-card">
+                    <div class="calculator-icon">📊</div>
+                    <h3>Business Valuation Calculator</h3>
+                    <p>Estimate your business value using proven valuation methods. Essential for exit planning and M&A.</p>
+                    <button class="calc-button" onclick="openCalculator('valuation')">Value My Business</button>
+                </div>
+                
+                <div class="calculator-card">
+                    <div class="calculator-icon">📈</div>
+                    <h3>Profit Margin Calculator</h3>
+                    <p>Analyze your profitability and compare against industry benchmarks. Identify optimization opportunities.</p>
+                    <button class="calc-button" onclick="openCalculator('profit')">Calculate Margins</button>
+                </div>
+                
+                <div class="calculator-card">
+                    <div class="calculator-icon">🏦</div>
+                    <h3>DSCR Calculator</h3>
+                    <p>Determine your Debt Service Coverage Ratio for loan qualification and financial health assessment.</p>
+                    <button class="calc-button" onclick="openCalculator('dscr')">Calculate DSCR</button>
+                </div>
+                
+                <div class="calculator-card">
+                    <div class="calculator-icon">🚀</div>
+                    <h3>Exit Readiness Calculator</h3>
+                    <p>Assess your business readiness for sale or acquisition. Get a comprehensive exit planning score.</p>
+                    <button class="calc-button" onclick="openCalculator('exit')">Check Exit Readiness</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Regional Offices -->
+    <section class="offices">
+        <div class="container">
+            <h2 class="section-title">National Network, Local Expertise</h2>
+            <div class="office-grid">
+                <div class="office-card">
+                    <h3>🗽 New York</h3>
+                    <p>Wall Street connections, investment banking relationships, and Fortune 500 expertise in the financial capital of America.</p>
+                </div>
+                <div class="office-card">
+                    <h3>🏭 Chicago</h3>
+                    <p>Manufacturing and distribution capital expertise, serving the industrial heartland with specialized financing solutions.</p>
+                </div>
+                <div class="office-card">
+                    <h3>🌴 Los Angeles</h3>
+                    <p>Technology and entertainment industry specialization, connecting innovators with growth capital on the West Coast.</p>
+                </div>
+                <div class="office-card">
+                    <h3>🏖️ Miami</h3>
+                    <p>International business and emerging market access, gateway to Latin America and global trade opportunities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <p>SBA Lending<br>Business Valuations<br>M&A Advisory<br>Capital Planning</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Industries</h3>
+                    <p>Manufacturing<br>Technology<br>Healthcare<br>Professional Services</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Locations</h3>
+                    <p>New York • Chicago<br>Los Angeles • Miami<br>Serving All 50 States</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 McNath Capital Group. All rights reserved. | America's Business Capital Specialists</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Calculator Modals -->
+    <div id="sbaModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>🏦 SBA Loan Calculator</h2>
+            <form class="calc-form" onsubmit="calculateSBA(event)">
+                <div class="form-group">
+                    <label>Email Address:</label>
+                    <input type="email" id="sbaEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Company Name:</label>
+                    <input type="text" id="sbaCompany" required>
+                </div>
+                <div class="form-group">
+                    <label>Annual Revenue:</label>
+                    <select id="sbaRevenue" required>
+                        <option value="">Select Revenue Range</option>
+                        <option value="under500k">Under $500K</option>
+                        <option value="500k-1m">$500K - $1M</option>
+                        <option value="1m-5m">$1M - $5M</option>
+                        <option value="5m-25m">$5M - $25M</option>
+                        <option value="over25m">Over $25M</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Loan Amount Needed:</label>
+                    <input type="number" id="sbaLoanAmount" placeholder="500000" required>
+                </div>
+                <div class="form-group">
+                    <label>Loan Purpose:</label>
+                    <select id="sbaUse" required>
+                        <option value="">Select Purpose</option>
+                        <option value="acquisition">Business Acquisition</option>
+                        <option value="expansion">Business Expansion</option>
+                        <option value="equipment">Equipment Purchase</option>
+                        <option value="realestate">Real Estate</option>
+                        <option value="working">Working Capital</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Preferred Region:</label>
+                    <select id="sbaRegion">
+                        <option value="any">Any Location</option>
+                        <option value="nyc">New York</option>
+                        <option value="chicago">Chicago</option>
+                        <option value="la">Los Angeles</option>
+                        <option value="miami">Miami</option>
+                    </select>
+                </div>
+                <button type="submit" class="calculate-btn">Calculate SBA Payment</button>
+            </form>
+            <div id="sbaResults" class="results">
+                <h3>Your SBA Loan Analysis</h3>
+                <div id="sbaOutput"></div>
+                <p style="margin-top: 20px; font-size: 14px; color: #666;">
+                    Results saved and our regional team will follow up within 24 hours with next steps.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="valuationModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>📊 Business Valuation Calculator</h2>
+            <form class="calc-form" onsubmit="calculateValuation(event)">
+                <div class="form-group">
+                    <label>Email Address:</label>
+                    <input type="email" id="valEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Company Name:</label>
+                    <input type="text" id="valCompany" required>
+                </div>
+                <div class="form-group">
+                    <label>Annual Revenue:</label>
+                    <input type="number" id="valRevenue" placeholder="2000000" required>
+                </div>
+                <div class="form-group">
+                    <label>Annual Profit (EBITDA):</label>
+                    <input type="number" id="valProfit" placeholder="400000" required>
+                </div>
+                <div class="form-group">
+                    <label>Industry:</label>
+                    <select id="valIndustry" required>
+                        <option value="">Select Industry</option>
+                        <option value="manufacturing">Manufacturing</option>
+                        <option value="technology">Technology</option>
+                        <option value="healthcare">Healthcare</option>
+                        <option value="professional">Professional Services</option>
+                        <option value="retail">Retail</option>
+                        <option value="construction">Construction</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Valuation Purpose:</label>
+                    <select id="valPurpose" required>
+                        <option value="">Select Purpose</option>
+                        <option value="sale">Planning to Sell</option>
+                        <option value="planning">Strategic Planning</option>
+                        <option value="acquisition">Potential Acquisition</option>
+                        <option value="financing">Financing/Investment</option>
+                        <option value="curious">Just Curious</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Preferred Region:</label>
+                    <select id="valRegion">
+                        <option value="any">Any Location</option>
+                        <option value="nyc">New York</option>
+                        <option value="chicago">Chicago</option>
+                        <option value="la">Los Angeles</option>
+                        <option value="miami">Miami</option>
+                    </select>
+                </div>
+                <button type="submit" class="calculate-btn">Value My Business</button>
+            </form>
+            <div id="valuationResults" class="results">
+                <h3>Your Business Valuation</h3>
+                <div id="valuationOutput"></div>
+                <p style="margin-top: 20px; font-size: 14px; color: #666;">
+                    Results saved and our M&A team will follow up within 24 hours with detailed analysis.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="profitModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>📈 Profit Margin Calculator</h2>
+            <form class="calc-form" onsubmit="calculateProfit(event)">
+                <div class="form-group">
+                    <label>Email Address:</label>
+                    <input type="email" id="profitEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Company Name:</label>
+                    <input type="text" id="profitCompany" required>
+                </div>
+                <div class="form-group">
+                    <label>Annual Revenue:</label>
+                    <input type="number" id="profitRevenue" placeholder="1000000" required>
+                </div>
+                <div class="form-group">
+                    <label>Cost of Goods Sold (COGS):</label>
+                    <input type="number" id="profitCOGS" placeholder="600000" required>
+                </div>
+                <div class="form-group">
+                    <label>Operating Expenses:</label>
+                    <input type="number" id="profitOpex" placeholder="250000" required>
+                </div>
+                <div class="form-group">
+                    <label>Industry:</label>
+                    <select id="profitIndustry" required>
+                        <option value="">Select Industry</option>
+                        <option value="manufacturing">Manufacturing</option>
+                        <option value="technology">Technology</option>
+                        <option value="healthcare">Healthcare</option>
+                        <option value="professional">Professional Services</option>
+                        <option value="retail">Retail</option>
+                        <option value="construction">Construction</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <button type="submit" class="calculate-btn">Calculate Profit Margins</button>
+            </form>
+            <div id="profitResults" class="results">
+                <h3>Your Profit Analysis</h3>
+                <div id="profitOutput"></div>
+                <p style="margin-top: 20px; font-size: 14px; color: #666;">
+                    Results saved and our advisory team will follow up with optimization recommendations.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Calculator functionality
+        function openCalculator(type) {
+            const modal = document.getElementById(type + 'Modal');
+            modal.style.display = 'block';
+        }
+
+        // Close modal functionality
+        document.querySelectorAll('.close').forEach(closeBtn => {
+            closeBtn.onclick = function() {
+                this.closest('.modal').style.display = 'none';
+            }
+        });
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+
+        function calculateSBA(event) {
+            event.preventDefault();
+            
+            const loanAmount = parseFloat(document.getElementById('sbaLoanAmount').value);
+            const email = document.getElementById('sbaEmail').value;
+            const company = document.getElementById('sbaCompany').value;
+            const revenue = document.getElementById('sbaRevenue').value;
+            const use = document.getElementById('sbaUse').value;
+            const region = document.getElementById('sbaRegion').value;
+            
+            // SBA 7(a) typical terms: 6.5-11% interest, 10-25 year terms
+            const interestRate = 0.08; // 8% average
+            const termYears = loanAmount > 1000000 ? 20 : 15;
+            const termMonths = termYears * 12;
+            const downPayment = loanAmount * 0.1; // 10% down typical
+            
+            const monthlyRate = interestRate / 12;
+            const monthlyPayment = (loanAmount - downPayment) * (monthlyRate * Math.pow(1 + monthlyRate, termMonths)) / (Math.pow(1 + monthlyRate, termMonths) - 1);
+            
+            document.getElementById('sbaOutput').innerHTML = `
+                <div class="result-item">💰 Loan Amount: $${loanAmount.toLocaleString()}</div>
+                <div class="result-item">💵 Down Payment: $${downPayment.toLocaleString()}</div>
+                <div class="result-item">📅 Monthly Payment: $${monthlyPayment.toLocaleString()}</div>
+                <div class="result-item">⏱️ Term: ${termYears} years</div>
+                <div class="result-item">📊 Interest Rate: ~${(interestRate * 100).toFixed(1)}%</div>
+            `;
+            
+            document.getElementById('sbaResults').style.display = 'block';
+            
+            // Save to spreadsheet (simulate)
+            console.log('SBA Lead:', { email, company, revenue, loanAmount, use, region, monthlyPayment });
+            
+            // In real implementation, this would submit to Google Sheets
+            submitToSpreadsheet('SBA Calculator', {
+                email, company, revenue, loanAmount, use, region, 
+                monthlyPayment: Math.round(monthlyPayment)
+            });
+        }
+
+        function calculateValuation(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('valEmail').value;
+            const company = document.getElementById('valCompany').value;
+            const revenue = parseFloat(document.getElementById('valRevenue').value);
+            const profit = parseFloat(document.getElementById('valProfit').value);
+            const industry = document.getElementById('valIndustry').value;
+            const purpose = document.getElementById('valPurpose').value;
+            const region = document.getElementById('valRegion').value;
+            
+            // Industry multipliers
+            const multipliers = {
+                'technology': { min: 4, max: 8 },
+                'healthcare': { min: 3, max: 6 },
+                'professional': { min: 2, max: 4 },
+                'manufacturing': { min: 3, max: 5 },
+                'retail': { min: 1, max: 3 },
+                'construction': { min: 2, max: 4 },
+                'other': { min: 2, max: 4 }
+            };
+            
+            const mult = multipliers[industry] || multipliers['other'];
+            const lowValue = profit * mult.min;
+            const highValue = profit * mult.max;
+            const avgValue = (lowValue + highValue) / 2;
+            
+            document.getElementById('valuationOutput').innerHTML = `
+                <div class="result-item">📊 Estimated Value Range: $${lowValue.toLocaleString()} - $${highValue.toLocaleString()}</div>
+                <div class="result-item">🎯 Average Estimate: $${avgValue.toLocaleString()}</div>
+                <div class="result-item">📈 Revenue Multiple: ${(avgValue/revenue).toFixed(1)}x</div>
+                <div class="result-item">💰 EBITDA Multiple: ${(avgValue/profit).toFixed(1)}x</div>
+            `;
+            
+            document.getElementById('valuationResults').style.display = 'block';
+            
+            console.log('Valuation Lead:', { email, company, revenue, profit, industry, purpose, region, avgValue });
+            
+            submitToSpreadsheet('Business Valuation', {
+                email, company, revenue, profit, industry, purpose, region,
+                estimatedValue: Math.round(avgValue)
+            });
+        }
+
+        function calculateProfit(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('profitEmail').value;
+            const company = document.getElementById('profitCompany').value;
+            const revenue = parseFloat(document.getElementById('profitRevenue').value);
+            const cogs = parseFloat(document.getElementById('profitCOGS').value);
+            const opex = parseFloat(document.getElementById('profitOpex').value);
+            const industry = document.getElementById('profitIndustry').value;
+            
+            const grossProfit = revenue - cogs;
+            const netProfit = grossProfit - opex;
+            const grossMargin = (grossProfit / revenue) * 100;
+            const netMargin = (netProfit / revenue) * 100;
+            
+            // Industry benchmarks
+            const benchmarks = {
+                'technology': 75,
+                'healthcare': 35,
+                'professional': 45,
+                'manufacturing': 25,
+                'retail': 20,
+                'construction': 30,
+                'other': 25
+            };
+            
+            const benchmark = benchmarks[industry] || 25;
+            const vs_benchmark = grossMargin > benchmark ? 'Above' : 'Below';
+            
+            document.getElementById('profitOutput').innerHTML = `
+                <div class="result-item">💰 Gross Profit: $${grossProfit.toLocaleString()}</div>
+                <div class="result-item">📊 Gross Margin: ${grossMargin.toFixed(1)}%</div>
+                <div class="result-item">📈 Net Profit: $${netProfit.toLocaleString()}</div>
+                <div class="result-item">🎯 Net Margin: ${netMargin.toFixed(1)}%</div>
+                <div class="result-item">📋 Industry Benchmark: ${benchmark}% (${vs_benchmark} Average)</div>
+            `;
+            
+            document.getElementById('profitResults').style.display = 'block';
+            
+            console.log('Profit Lead:', { email, company, revenue, cogs, opex, industry, grossMargin, netMargin });
+            
+            submitToSpreadsheet('Profit Margin', {
+                email, company, revenue, industry,
+                grossMargin: grossMargin.toFixed(1),
+                netMargin: netMargin.toFixed(1)
+            });
+        }
+
+        function submitToSpreadsheet(calculatorType, data) {
+            // This will be replaced with actual Google Sheets integration
+            // For now, just log to console
+            console.log(`Submitting ${calculatorType} lead:`, {
+                timestamp: new Date().toISOString(),
+                calculatorType: calculatorType,
+                ...data
+            });
+            
+            // In real implementation:
+            // - Submit to Formspree or Google Forms
+            // - Data automatically populates Knox-managed spreadsheet
+            // - Lead gets prioritized and tracked
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
