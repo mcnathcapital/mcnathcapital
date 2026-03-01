@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>McNath Capital | Private Investment</title>
+    <style>
+        @import url('data:application/font-woff2;charset=utf-8;base64,'); /* Fallback for fonts */
+        
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --blue: #4A90C4;
+            --blue-dark: #2B6FA0;
+            --blue-light: #6AADD9;
+            --blue-border: rgba(74,144,196,0.22);
+            --bg: #FAFBFC;
+            --bg-2: #F0F4F8;
+            --text: #1A2B3C;
+            --muted: #6B8CAE;
+            --white: #ffffff;
+            --navy: #0D1B2A;
+            --navy-mid: #112236;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Georgia, 'Times New Roman', serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 64px;
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--blue-border);
+            transition: box-shadow 0.3s;
+        }
+
+        nav.scrolled {
+            box-shadow: 0 2px 24px rgba(74,144,196,0.1);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .nav-brand-label {
+            font-family: Georgia, serif;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--navy);
+            letter-spacing: 0.08em;
+            border-left: 1px solid var(--blue-border);
+            padding-left: 14px;
+            line-height: 1.2;
+        }
+
+        .nav-brand-label span {
+            display: block;
+            font-size: 0.6rem;
+            font-family: Arial, sans-serif;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--muted);
+            font-weight: 400;
+            margin-top: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--blue);
+        }
+
+        .nav-cta {
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            padding: 12px 24px;
+            border: 1.5px solid var(--blue);
+            color: var(--blue);
+            text-decoration: none;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .nav-cta:hover {
+            background: var(--blue);
+            color: #fff;
+        }
+
+        /* HERO */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: var(--navy);
+        }
+
+        .hero-bg-layer {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 60% 70% at 100% 50%, rgba(74,144,196,0.1) 0%, transparent 65%), radial-gradient(ellipse 40% 50% at 0% 80%, rgba(74,144,196,0.05) 0%, transparent 60%), linear-gradient(135deg, #0D1B2A 0%, #091522 100%);
+        }
+
+        .hero-grid-lines {
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(74,144,196,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(74,144,196,0.06) 1px, transparent 1px);
+            background-size: 72px 72px;
+        }
+
+        .hero-accent-v {
+            position: absolute;
+            left: 64px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent 10%, rgba(74,144,196,0.3) 40%, rgba(74,144,196,0.3) 60%, transparent 90%);
+        }
+
+        .hero-accent-h {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            width: 45%;
+            height: 1px;
+            background: linear-gradient(to right, rgba(74,144,196,0.2), transparent);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 160px 64px 100px 120px;
+            max-width: 760px;
+        }
+
+        .hero-eyebrow {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.42em;
+            text-transform: uppercase;
+            color: var(--blue-light);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 28px;
+        }
+
+        .hero-eyebrow::before {
+            content: '';
+            width: 28px;
+            height: 1px;
+            background: var(--blue-light);
+            display: block;
+        }
+
+        h1 {
+            font-family: Georgia, serif;
+            font-size: clamp(3.5rem, 6vw, 6rem);
+            font-weight: 300;
+            line-height: 1.07;
+            color: #fff;
+            margin-bottom: 28px;
+        }
+
+        h1 em {
+            font-style: italic;
+            color: var(--blue-light);
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            font-weight: 300;
+            line-height: 1.95;
+            color: rgba(255,255,255,0.6);
+            max-width: 520px;
+            margin-bottom: 44px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .btn-primary {
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            padding: 16px 36px;
+            background: var(--blue);
+            color: #fff;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: var(--blue-dark);
+        }
+
+        .btn-ghost {
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.3s;
+        }
+
+        .btn-ghost span {
+            transition: transform 0.3s;
+            display: inline-block;
+        }
+
+        .btn-ghost:hover {
+            color: var(--blue-light);
+        }
+
+        .btn-ghost:hover span {
+            transform: translateX(5px);
+        }
+
+        .hero-right {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 42%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 160px 64px 100px 40px;
+            z-index: 2;
+        }
+
+        .hero-pillars {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+        }
+
+        .hero-pillar {
+            padding: 24px 28px;
+            background: rgba(255,255,255,0.03);
+            border-left: 2px solid rgba(74,144,196,0.25);
+            transition: border-color 0.3s, background 0.3s;
+        }
+
+        .hero-pillar:hover {
+            border-color: var(--blue);
+            background: rgba(74,144,196,0.07);
+        }
+
+        .hp-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--blue-light);
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .hp-value {
+            font-family: Georgia, serif;
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* SHARED */
+        .section-wrap {
+            padding: 120px 64px;
+        }
+
+        .section-wrap.light { background: #fff; }
+        .section-wrap.alt { background: var(--bg-2); }
+        .section-wrap.dark { background: var(--navy); }
+        .section-wrap.navy-mid { background: var(--navy-mid); }
+
+        .section-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.38em;
+            text-transform: uppercase;
+            color: var(--blue);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+
+        .section-label::before {
+            content: '';
+            display: block;
+            width: 28px;
+            height: 1.5px;
+            background: var(--blue);
+        }
+
+        .dark .section-label, .navy-mid .section-label { color: var(--blue-light); }
+        .dark .section-label::before, .navy-mid .section-label::before { background: var(--blue-light); }
+
+        h2 {
+            font-family: Georgia, serif;
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            font-weight: 300;
+            line-height: 1.12;
+            color: var(--navy);
+            margin-bottom: 24px;
+        }
+
+        h2 em {
+            font-style: italic;
+            color: var(--blue);
+        }
+
+        .dark h2, .navy-mid h2 { color: #fff; }
+        .dark h2 em, .navy-mid h2 em { color: var(--blue-light); }
+
+        .body-text {
+            font-size: 1rem;
+            font-weight: 300;
+            line-height: 1.95;
+            color: var(--muted);
+        }
+
+        .dark .body-text, .navy-mid .body-text { color: rgba(255,255,255,0.5); }
+
+        .blue-rule {
+            width: 40px;
+            height: 2px;
+            background: var(--blue);
+            margin: 24px 0;
+        }
+
+        .dark .blue-rule { background: var(--blue-light); opacity: 0.5; }
+
+        /* ABOUT / PHILOSOPHY */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .three-col {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--blue-border);
+            border: 1.5px solid var(--blue-border);
+        }
+
+        .value-card {
+            background: #fff;
+            padding: 44px 36px;
+            transition: background 0.3s;
+        }
+
+        .value-card:hover { background: var(--bg-2); }
+
+        .value-icon {
+            font-size: 2rem;
+            color: var(--blue);
+            margin-bottom: 18px;
+        }
+
+        .value-title {
+            font-family: Georgia, serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--navy);
+            margin-bottom: 12px;
+        }
+
+        .value-text {
+            font-size: 0.95rem;
+            font-weight: 300;
+            line-height: 1.85;
+            color: var(--muted);
+        }
+
+        /* FOCUS */
+        .focus-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.08);
+            margin-top: 60px;
+        }
+
+        .focus-card {
+            background: rgba(255,255,255,0.02);
+            padding: 44px 40px;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.3s;
+        }
+
+        .focus-card:hover { background: rgba(74,144,196,0.09); }
+
+        .focus-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--blue-light);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s;
+        }
+
+        .focus-card:hover::after { transform: scaleX(1); }
+
+        .focus-num {
+            font-family: Georgia, serif;
+            font-size: 3.5rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.04);
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+
+        .focus-title {
+            font-family: Georgia, serif;
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+
+        .focus-text {
+            font-size: 0.95rem;
+            font-weight: 300;
+            line-height: 1.85;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .focus-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .focus-tag {
+            font-size: 0.7rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--blue-light);
+            border: 1px solid rgba(106,173,217,0.25);
+            padding: 4px 12px;
+        }
+
+        /* APPROACH */
+        .approach-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .approach-steps::before {
+            content: '';
+            position: absolute;
+            top: 32px;
+            left: 12%;
+            right: 12%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(74,144,196,0.3), transparent);
+        }
+
+        .approach-step {
+            padding: 0 24px;
+            text-align: center;
+        }
+
+        .a-dot-wrap {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 28px;
+        }
+
+        .a-dot {
+            width: 64px;
+            height: 64px;
+            border: 1.5px solid var(--blue-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            position: relative;
+            z-index: 1;
+        }
+
+        .a-dot-num {
+            font-family: Georgia, serif;
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--blue);
+            line-height: 1;
+        }
+
+        .a-title {
+            font-family: Georgia, serif;
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--navy);
+            margin-bottom: 10px;
+        }
+
+        .a-text {
+            font-size: 0.9rem;
+            font-weight: 300;
+            line-height: 1.8;
+            color: var(--muted);
+        }
+
+        /* TEAM */
+        .team-founders {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+        }
+
+        .founder-card {
+            background: var(--navy);
+            position: relative;
+            overflow: hidden;
+            padding: 56px 48px;
+            border: 1px solid rgba(74,144,196,0.15);
+        }
+
+        .founder-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(to right, var(--blue), var(--blue-light));
+        }
+
+        .founder-card-bg {
+            position: absolute;
+            bottom: -40px;
+            right: -40px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(74,144,196,0.07) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .founder-initial {
+            width: 96px;
+            height: 96px;
+            border: 1.5px solid rgba(74,144,196,0.4);
+            background: rgba(74,144,196,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Georgia, serif;
+            font-size: 2.4rem;
+            font-weight: 300;
+            color: var(--blue-light);
+            margin-bottom: 28px;
+            border-radius: 50%;
+        }
+
+        .founder-badge {
+            display: inline-block;
+            font-size: 0.6rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            background: var(--blue);
+            color: #fff;
+            padding: 4px 12px;
+            margin-bottom: 16px;
+        }
+
+        .founder-name {
+            font-family: Georgia, serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .founder-title {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--blue-light);
+            margin-bottom: 24px;
+        }
+
+        .founder-bio {
+            font-size: 0.95rem;
+            font-weight: 300;
+            line-height: 1.9;
+            color: rgba(255,255,255,0.55);
+        }
+
+        .founder-bio + .founder-bio { margin-top: 16px; }
+
+        /* CRITERIA */
+        .criteria-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 60px;
+        }
+
+        .criteria-card {
+            border: 1.5px solid var(--blue-border);
+            background: #fff;
+            padding: 36px 32px 36px 36px;
+            position: relative;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .criteria-card:hover {
+            border-color: rgba(74,144,196,0.45);
+            box-shadow: 0 4px 20px rgba(74,144,196,0.07);
+        }
+
+        .criteria-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--blue);
+        }
+
+        .criteria-title {
+            font-family: Georgia, serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--navy);
+            margin-bottom: 8px;
+        }
+
+        .criteria-text {
+            font-size: 0.95rem;
+            font-weight: 300;
+            line-height: 1.82;
+            color: var(--muted);
+        }
+
+        /* CONTACT */
+        .contact-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .contact-body {
+            font-size: 1rem;
+            font-weight: 300;
+            line-height: 1.95;
+            color: var(--muted);
+            margin-bottom: 32px;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 36px;
+        }
+
+        .contact-row {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--blue-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: var(--blue);
+            background: rgba(74,144,196,0.05);
+            flex-shrink: 0;
+        }
+
+        .contact-txt {
+            font-size: 0.95rem;
+            color: var(--muted);
+        }
+
+        .contact-txt strong {
+            display: block;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--blue);
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+
+        .sister-note {
+            margin-top: 32px;
+            padding: 22px 24px 22px 28px;
+            background: rgba(74,144,196,0.06);
+            border: 1px solid rgba(74,144,196,0.22);
+            border-left: 3px solid var(--blue);
+            font-size: 0.9rem;
+            font-weight: 300;
+            line-height: 1.8;
+            color: var(--muted);
+        }
+
+        .sister-note strong {
+            color: var(--navy);
+            font-weight: 500;
+            display: block;
+            margin-bottom: 4px;
+            font-size: 0.95rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .fgrp {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .fgrp label {
+            font-size: 0.7rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--blue);
+            font-weight: 500;
+        }
+
+        .fgrp input, .fgrp select, .fgrp textarea {
+            background: #fff;
+            border: 1.5px solid var(--blue-border);
+            padding: 14px 16px;
+            color: var(--text);
+            font-family: Arial, sans-serif;
+            font-size: 0.95rem;
+            font-weight: 300;
+            outline: none;
+            transition: border-color 0.3s;
+            resize: vertical;
+        }
+
+        .fgrp input::placeholder, .fgrp textarea::placeholder {
+            color: rgba(107,140,174,0.4);
+        }
+
+        .fgrp input:focus, .fgrp select:focus, .fgrp textarea:focus {
+            border-color: var(--blue);
+        }
+
+        .fgrp select option {
+            background: #fff;
+            color: var(--text);
+        }
+
+        .btn-submit {
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            padding: 16px 36px;
+            background: var(--blue);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            transition: background 0.3s;
+            width: 100%;
+            margin-top: 8px;
+        }
+
+        .btn-submit:hover { background: var(--blue-dark); }
+
+        /* FOOTER */
+        footer {
+            background: #080F18;
+            border-top: 1px solid rgba(74,144,196,0.15);
+            padding: 44px 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 28px;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .footer-brand-label {
+            font-family: Georgia, serif;
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: rgba(255,255,255,0.4);
+            border-left: 1px solid rgba(255,255,255,0.12);
+            padding-left: 16px;
+            letter-spacing: 0.06em;
+        }
+
+        .footer-copy {
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.25);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .footer-links a {
+            font-size: 0.7rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.25);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover { color: var(--blue-light); }
+
+        @media (max-width: 1024px) {
+            .hero-content {
+                padding: 140px 40px 80px 60px;
+            }
+            
+            .hero-right {
+                width: 50%;
+                padding: 140px 40px 80px 30px;
+            }
+            
+            .section-wrap {
+                padding: 80px 40px;
+            }
+            
+            .two-col,
+            .contact-split {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+            
+            .three-col,
+            .criteria-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .focus-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .team-founders {
+                grid-template-columns: 1fr;
+            }
+            
+            .approach-steps {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+            
+            .approach-steps::before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 14px 32px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content {
+                padding: 120px 32px 80px;
+                max-width: 100%;
+            }
+            
+            .hero-right {
+                display: none;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-wrap {
+                padding: 60px 32px;
+            }
+            
+            .approach-steps {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            footer {
+                flex-direction: column;
+                text-align: center;
+                padding: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- NAV -->
+    <nav id="nav">
+        <div class="nav-brand">
+            <div class="nav-brand-label">
+                McNath Capital
+                <span>Private Investment</span>
+            </div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#focus">Investment Focus</a></li>
+            <li><a href="#approach">Approach</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a href="#contact" class="nav-cta">Get Started</a>
+    </nav>
+
+    <!-- HERO -->
+    <section id="hero">
+        <div class="hero-bg-layer"></div>
+        <div class="hero-grid-lines"></div>
+        <div class="hero-accent-v"></div>
+        <div class="hero-accent-h"></div>
+        
+        <div class="hero-content">
+            <div class="hero-eyebrow">Private Investment Excellence</div>
+            <h1>McNath Capital</h1>
+            <h1><em>Strategic Growth Partners</em></h1>
+            <p class="hero-desc">We specialize in strategic investments that drive sustainable growth and create exceptional value. Our disciplined approach combines deep market expertise with operational excellence to deliver superior returns for our partners.</p>
+            <div class="hero-actions">
+                <a href="#contact" class="btn-primary">Partner With Us</a>
+                <a href="#about" class="btn-ghost">Explore Our Approach <span>→</span></a>
+            </div>
+        </div>
+        
+        <div class="hero-right">
+            <div class="hero-pillars">
+                <div class="hero-pillar">
+                    <div class="hp-label">Assets Under Management</div>
+                    <div class="hp-value">$2.5B+</div>
+                </div>
+                <div class="hero-pillar">
+                    <div class="hp-label">Portfolio Companies</div>
+                    <div class="hp-value">45+</div>
+                </div>
+                <div class="hero-pillar">
+                    <div class="hp-label">Years Experience</div>
+                    <div class="hp-value">15+</div>
+                </div>
+                <div class="hero-pillar">
+                    <div class="hp-label">Average IRR</div>
+                    <div class="hp-value">24%</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section-wrap light">
+        <div class="section-label">Investment Philosophy</div>
+        <div class="two-col">
+            <div>
+                <h2>Building <em>Exceptional</em> Companies</h2>
+                <div class="blue-rule"></div>
+                <p class="body-text">Our investment philosophy is rooted in the belief that exceptional returns are generated through strategic partnerships with visionary entrepreneurs and management teams. We focus on companies with strong fundamentals, clear competitive advantages, and significant growth potential.</p>
+            </div>
+            <div>
+                <p class="body-text">We take a hands-on approach, working closely with our portfolio companies to accelerate growth through strategic guidance, operational expertise, and extensive industry networks. Our goal is to create sustainable value that benefits all stakeholders.</p>
+                <div class="blue-rule"></div>
+                <p class="body-text">Every investment decision is guided by rigorous analysis, careful risk assessment, and a commitment to generating superior risk-adjusted returns over the long term.</p>
+            </div>
+        </div>
+        
+        <div class="three-col">
+            <div class="value-card">
+                <div class="value-icon">🎯</div>
+                <h3 class="value-title">Strategic Focus</h3>
+                <p class="value-text">We target high-growth sectors with strong market fundamentals and clear paths to value creation through operational improvements and strategic initiatives.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">🔍</div>
+                <h3 class="value-title">Rigorous Analysis</h3>
+                <p class="value-text">Comprehensive due diligence and market analysis ensure informed investment decisions backed by thorough financial modeling and risk assessment.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">🤝</div>
+                <h3 class="value-title">Active Partnership</h3>
+                <p class="value-text">We partner closely with management teams, providing strategic guidance, industry expertise, and access to our extensive network of advisors and resources.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOCUS -->
+    <section id="focus" class="section-wrap dark">
+        <div class="section-label">Investment Focus</div>
+        <div class="two-col">
+            <div>
+                <h2>Sector <em>Expertise</em></h2>
+                <div class="blue-rule"></div>
+                <p class="body-text">We focus on sectors where we have deep expertise and can add significant value through our industry knowledge, operational experience, and strategic networks.</p>
+            </div>
+            <div>
+                <p class="body-text">Our investment strategy targets companies with scalable business models, defensible market positions, and strong management teams positioned for accelerated growth.</p>
+            </div>
+        </div>
+        
+        <div class="focus-grid">
+            <div class="focus-card">
+                <div class="focus-num">01</div>
+                <h3 class="focus-title">Technology</h3>
+                <p class="focus-text">Enterprise software, fintech, and digital transformation companies with scalable SaaS models, strong unit economics, and clear paths to market leadership.</p>
+                <div class="focus-tags">
+                    <span class="focus-tag">ENTERPRISE SOFTWARE</span>
+                    <span class="focus-tag">FINTECH</span>
+                    <span class="focus-tag">DIGITAL PLATFORMS</span>
+                </div>
+            </div>
+            <div class="focus-card">
+                <div class="focus-num">02</div>
+                <h3 class="focus-title">Healthcare</h3>
+                <p class="focus-text">Medical devices, digital health, and healthcare services driving innovation in patient care with proven clinical outcomes and regulatory pathways.</p>
+                <div class="focus-tags">
+                    <span class="focus-tag">MEDICAL DEVICES</span>
+                    <span class="focus-tag">DIGITAL HEALTH</span>
+                    <span class="focus-tag">HEALTHCARE IT</span>
+                </div>
+            </div>
+            <div class="focus-card">
+                <div class="focus-num">03</div>
+                <h3 class="focus-title">Sustainability</h3>
+                <p class="focus-text">Clean technology, renewable energy, and environmental solutions addressing climate challenges with scalable, commercially viable technologies.</p>
+                <div class="focus-tags">
+                    <span class="focus-tag">CLEAN TECH</span>
+                    <span class="focus-tag">RENEWABLE ENERGY</span>
+                    <span class="focus-tag">ESG SOLUTIONS</span>
+                </div>
+            </div>
+            <div class="focus-card">
+                <div class="focus-num">04</div>
+                <h3 class="focus-title">Consumer</h3>
+                <p class="focus-text">Direct-to-consumer brands and retail innovation with strong customer loyalty, differentiated products, and omnichannel distribution strategies.</p>
+                <div class="focus-tags">
+                    <span class="focus-tag">D2C BRANDS</span>
+                    <span class="focus-tag">RETAIL TECH</span>
+                    <span class="focus-tag">CONSUMER SERVICES</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- APPROACH -->
+    <section id="approach" class="section-wrap alt">
+        <div class="section-label">Our Approach</div>
+        <div class="two-col">
+            <div>
+                <h2>Investment <em>Process</em></h2>
+                <div class="blue-rule"></div>
+                <p class="body-text">Our systematic approach to investment evaluation and portfolio management is designed to identify exceptional opportunities while managing risk through rigorous analysis and ongoing support.</p>
+            </div>
+            <div>
+                <p class="body-text">From initial screening through exit, we maintain a disciplined process that maximizes value creation potential while ensuring alignment between all stakeholders throughout the investment lifecycle.</p>
+            </div>
+        </div>
+        
+        <div class="approach-steps">
+            <div class="approach-step">
+                <div class="a-dot-wrap">
+                    <div class="a-dot">
+                        <div class="a-dot-num">1</div>
+                    </div>
+                </div>
+                <h4 class="a-title">Sourcing</h4>
+                <p class="a-text">Leveraging our extensive network and industry relationships to identify high-quality investment opportunities with exceptional growth potential.</p>
+            </div>
+            <div class="approach-step">
+                <div class="a-dot-wrap">
+                    <div class="a-dot">
+                        <div class="a-dot-num">2</div>
+                    </div>
+                </div>
+                <h4 class="a-title">Evaluation</h4>
+                <p class="a-text">Comprehensive due diligence process including market analysis, financial modeling, operational assessment, and management evaluation.</p>
+            </div>
+            <div class="approach-step">
+                <div class="a-dot-wrap">
+                    <div class="a-dot">
+                        <div class="a-dot-num">3</div>
+                    </div>
+                </div>
+                <h4 class="a-title">Partnership</h4>
+                <p class="a-text">Active collaboration with management teams to develop strategic initiatives, optimize operations, and accelerate sustainable growth.</p>
+            </div>
+            <div class="approach-step">
+                <div class="a-dot-wrap">
+                    <div class="a-dot">
+                        <div class="a-dot-num">4</div>
+                    </div>
+                </div>
+                <h4 class="a-title">Value Creation</h4>
+                <p class="a-text">Ongoing support through strategic guidance, operational expertise, and access to our network to maximize long-term value creation.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TEAM -->
+    <section id="team" class="section-wrap navy-mid">
+        <div class="section-label">Leadership Team</div>
+        <div class="two-col">
+            <div>
+                <h2>Experienced <em>Leadership</em></h2>
+                <div class="blue-rule"></div>
+                <p class="body-text">Our team brings decades of investment experience across diverse sectors and market cycles, with a proven track record of value creation and successful exits.</p>
+            </div>
+            <div>
+                <p class="body-text">We combine deep industry expertise with operational experience to provide strategic guidance and support to our portfolio companies throughout their growth journey.</p>
+            </div>
+        </div>
+        
+        <div class="team-founders">
+            <div class="founder-card">
+                <div class="founder-card-bg"></div>
+                <div class="founder-initial">M</div>
+                <div class="founder-badge">FOUNDER & MANAGING PARTNER</div>
+                <h3 class="founder-name">Mac McNath</h3>
+                <p class="founder-title">MANAGING PARTNER</p>
+                <p class="founder-bio">Former investment banker with 15+ years of experience in private equity and venture capital. Led over $2.5B in successful transactions across technology, healthcare, and industrial sectors.</p>
+                <p class="founder-bio">Previously served as Managing Director at leading investment firms, focusing on growth capital and buyout transactions. MBA from Wharton, BS from Stanford University.</p>
+            </div>
+            <div class="founder-card">
+                <div class="founder-card-bg"></div>
+                <div class="founder-initial">T</div>
+                <div class="founder-badge">INVESTMENT COMMITTEE</div>
+                <h3 class="founder-name">Advisory Board</h3>
+                <p class="founder-title">STRATEGIC ADVISORS</p>
+                <p class="founder-bio">Our investment committee is comprised of seasoned industry executives, former CEOs, and investment professionals who provide strategic oversight and guidance.</p>
+                <p class="founder-bio">Members bring expertise across our target sectors including technology, healthcare, sustainability, and consumer markets, ensuring comprehensive evaluation and support.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CRITERIA -->
+    <section class="section-wrap light">
+        <div class="section-label">Investment Criteria</div>
+        <div class="two-col">
+            <div>
+                <h2>Target <em>Profile</em></h2>
+                <div class="blue-rule"></div>
+                <p class="body-text">We focus on established companies with proven business models, strong market positions, and exceptional management teams positioned for accelerated growth.</p>
+            </div>
+            <div>
+                <p class="body-text">Our investment criteria are designed to identify companies with sustainable competitive advantages and clear paths to value creation through strategic and operational improvements.</p>
+            </div>
+        </div>
+        
+        <div class="criteria-grid">
+            <div class="criteria-card">
+                <h4 class="criteria-title">Company Stage</h4>
+                <p class="criteria-text">Growth-stage companies with proven business models, established customer bases, and clear scalability. Typically Series B+ for venture investments or established companies for buyouts.</p>
+            </div>
+            <div class="criteria-card">
+                <h4 class="criteria-title">Financial Profile</h4>
+                <p class="criteria-text">Revenue range of $10M-$250M with strong unit economics, positive cash flow or clear path to profitability, and demonstrated ability to scale operations efficiently.</p>
+            </div>
+            <div class="criteria-card">
+                <h4 class="criteria-title">Investment Size</h4>
+                <p class="criteria-text">Initial investments between $5M-$50M with ability to provide follow-on capital for continued growth. Flexible structure including equity, debt, and hybrid instruments.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section-wrap light">
+        <div class="section-label">Partner With Us</div>
+        <div class="contact-split">
+            <div>
+                <h2>Start Your <em>Journey</em></h2>
+                <div class="blue-rule"></div>
+                <p class="contact-body">We partner with exceptional entrepreneurs and management teams who share our vision for building sustainable, high-growth companies. Whether you're seeking growth capital, strategic guidance, or exploring exit opportunities, we'd like to hear from you.</p>
+                
+                <div class="contact-details">
+                    <div class="contact-row">
+                        <div class="contact-icon">✉</div>
+                        <div class="contact-txt">
+                            <strong>Email</strong>
+                            info@mcnathcapital.com
+                        </div>
+                    </div>
+                    <div class="contact-row">
+                        <div class="contact-icon">📞</div>
+                        <div class="contact-txt">
+                            <strong>Phone</strong>
+                            +1 (555) 123-4567
+                        </div>
+                    </div>
+                    <div class="contact-row">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-txt">
+                            <strong>Location</strong>
+                            Los Angeles, California
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sister-note">
+                    <strong>Confidentiality Assured</strong>
+                    All inquiries and discussions are held in strict confidence. We understand the sensitive nature of strategic discussions and maintain the highest standards of discretion.
+                </div>
+            </div>
+            
+            <div>
+                <form>
+                    <div class="form-row">
+                        <div class="fgrp">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="fgrp">
+                            <label for="company">Company</label>
+                            <input type="text" id="company" name="company">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="fgrp">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="fgrp">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="fgrp">
+                            <label for="investment-type">Investment Interest</label>
+                            <select id="investment-type" name="investment-type">
+                                <option value="">Select investment type</option>
+                                <option value="growth">Growth Capital</option>
+                                <option value="buyout">Management Buyout</option>
+                                <option value="equity">Private Equity</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="fgrp">
+                            <label for="amount">Investment Range</label>
+                            <select id="amount" name="amount">
+                                <option value="">Select investment range</option>
+                                <option value="5m-15m">$5M - $15M</option>
+                                <option value="15m-30m">$15M - $30M</option>
+                                <option value="30m-50m">$30M - $50M</option>
+                                <option value="50m+">$50M+</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="fgrp">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" placeholder="Tell us about your company, growth objectives, and how we can help..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn-submit">Submit Inquiry</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-brand">
+            <div class="footer-brand-label">McNath Capital</div>
+        </div>
+        <div class="footer-copy">&copy; 2026 McNath Capital. All rights reserved.</div>
+        <ul class="footer-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#focus">Investment Focus</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your inquiry! We will contact you within 24 hours to discuss your investment goals.');
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
