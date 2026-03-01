@@ -3,828 +3,948 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>McNath Capital Group - America's Business Capital Specialists</title>
-    <meta name="description" content="Free business calculators and capital advisory services. SBA loans, business valuations, and M&A services across NYC, Chicago, Los Angeles, and Miami.">
-    <meta name="keywords" content="SBA loan calculator, business valuation calculator, profit margin calculator, business loans, M&A advisory">
-    
+    <title>McNath Capital | Private Investment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        * {
+        *, *::before, *::after {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
-        
+
+        :root {
+            --blue: #4A90C4;
+            --blue-dark: #2B6FA0;
+            --blue-light: #6AADD9;
+            --blue-border: rgba(74,144,196,0.22);
+            --bg: #FAFBFC;
+            --bg-2: #F0F4F8;
+            --text: #1A2B3C;
+            --muted: #6B8CAE;
+            --white: #ffffff;
+            --navy: #0D1B2A;
+            --navy-mid: #112236;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
+            font-family: 'Montserrat', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Header */
-        header {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
-            padding: 1rem 0;
-            position: sticky;
+
+        /* NAV */
+        nav {
+            position: fixed;
             top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .header-content {
+            left: 0;
+            right: 0;
+            z-index: 200;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 14px 64px;
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--blue-border);
+            transition: box-shadow 0.3s;
         }
-        
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
+
+        nav.scrolled {
+            box-shadow: 0 2px 24px rgba(74,144,196,0.1);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .logo-img {
+            height: 46px;
+            width: auto;
+            display: block;
+        }
+
+        .nav-brand-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--navy);
+            letter-spacing: 0.08em;
+            border-left: 1px solid var(--blue-border);
+            padding-left: 14px;
+            line-height: 1.2;
+        }
+
+        .nav-brand-label span {
+            display: block;
+            font-size: 0.52rem;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--muted);
+            font-weight: 400;
+            margin-top: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--blue);
+        }
+
+        .nav-cta {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            padding: 10px 22px;
+            border: 1.5px solid var(--blue);
+            color: var(--blue);
+            text-decoration: none;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .nav-cta:hover {
+            background: var(--blue);
             color: #fff;
         }
-        
-        .locations {
-            display: flex;
-            gap: 20px;
-            font-size: 0.9rem;
-            flex-wrap: wrap;
-        }
-        
-        .location {
+
+        /* HERO */
+        #hero {
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            gap: 5px;
-        }
-        
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 4rem 0;
-            text-align: center;
-        }
-        
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
-        
-        .cta-button {
-            display: inline-block;
-            background: #ff6b6b;
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: transform 0.3s ease;
-        }
-        
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
-        }
-        
-        /* Calculator Grid */
-        .calculators {
-            padding: 4rem 0;
-            background: white;
-        }
-        
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #2c3e50;
-        }
-        
-        .calculator-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        
-        .calculator-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            text-align: center;
-            transition: transform 0.3s ease;
-            border: 1px solid #eee;
-        }
-        
-        .calculator-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-        }
-        
-        .calculator-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-        
-        .calculator-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #2c3e50;
-        }
-        
-        .calculator-card p {
-            color: #666;
-            margin-bottom: 1.5rem;
-        }
-        
-        .calc-button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-        
-        .calc-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-        
-        /* Calculator Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-        }
-        
-        .modal-content {
-            background-color: white;
-            margin: 5% auto;
-            padding: 30px;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 600px;
             position: relative;
-            max-height: 80vh;
-            overflow-y: auto;
+            overflow: hidden;
+            background: var(--navy);
         }
-        
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
+
+        .hero-bg-layer {
             position: absolute;
-            right: 20px;
-            top: 15px;
+            inset: 0;
+            background: radial-gradient(ellipse 60% 70% at 100% 50%, rgba(74,144,196,0.1) 0%, transparent 65%), radial-gradient(ellipse 40% 50% at 0% 80%, rgba(74,144,196,0.05) 0%, transparent 60%), linear-gradient(135deg, #0D1B2A 0%, #091522 100%);
         }
-        
-        .close:hover {
-            color: #000;
+
+        .hero-grid-lines {
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(74,144,196,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(74,144,196,0.06) 1px, transparent 1px);
+            background-size: 72px 72px;
         }
-        
-        .calc-form {
-            margin-top: 20px;
+
+        .hero-accent-v {
+            position: absolute;
+            left: 64px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent 10%, rgba(74,144,196,0.3) 40%, rgba(74,144,196,0.3) 60%, transparent 90%);
         }
-        
-        .form-group {
+
+        .hero-accent-h {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            width: 45%;
+            height: 1px;
+            background: linear-gradient(to right, rgba(74,144,196,0.2), transparent);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 160px 64px 100px 120px;
+            max-width: 760px;
+        }
+
+        .hero-eyebrow {
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 0.42em;
+            text-transform: uppercase;
+            color: var(--blue-light);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 28px;
+            opacity: 0;
+            animation: fadeUp 0.7s 0.2s forwards;
+        }
+
+        .hero-eyebrow::before {
+            content: '';
+            width: 28px;
+            height: 1px;
+            background: var(--blue-light);
+            display: block;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 6vw, 5.4rem);
+            font-weight: 300;
+            line-height: 1.07;
+            color: #fff;
+            margin-bottom: 28px;
+            opacity: 0;
+            animation: fadeUp 0.7s 0.35s forwards;
+        }
+
+        h1 em {
+            font-style: italic;
+            color: var(--blue-light);
+        }
+
+        .hero-desc {
+            font-size: 0.88rem;
+            font-weight: 300;
+            line-height: 1.95;
+            color: rgba(255,255,255,0.5);
+            max-width: 520px;
+            margin-bottom: 44px;
+            opacity: 0;
+            animation: fadeUp 0.7s 0.5s forwards;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            opacity: 0;
+            animation: fadeUp 0.7s 0.65s forwards;
+        }
+
+        .btn-primary {
+            font-size: 0.67rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            padding: 14px 32px;
+            background: var(--blue);
+            color: #fff;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: var(--blue-dark);
+        }
+
+        .btn-ghost {
+            font-size: 0.67rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.3s;
+        }
+
+        .btn-ghost span {
+            transition: transform 0.3s;
+            display: inline-block;
+        }
+
+        .btn-ghost:hover {
+            color: var(--blue-light);
+        }
+
+        .btn-ghost:hover span {
+            transform: translateX(5px);
+        }
+
+        .hero-right {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 42%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 160px 64px 100px 40px;
+            z-index: 2;
+        }
+
+        .hero-pillars {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+        }
+
+        .hero-pillar {
+            padding: 20px 24px;
+            background: rgba(255,255,255,0.03);
+            border-left: 2px solid rgba(74,144,196,0.25);
+            transition: border-color 0.3s, background 0.3s;
+            opacity: 0;
+        }
+
+        .hero-pillar:nth-child(1) { animation: fadeIn 0.8s 0.8s forwards; }
+        .hero-pillar:nth-child(2) { animation: fadeIn 0.8s 1s forwards; }
+        .hero-pillar:nth-child(3) { animation: fadeIn 0.8s 1.2s forwards; }
+        .hero-pillar:nth-child(4) { animation: fadeIn 0.8s 1.4s forwards; }
+
+        .hero-pillar:hover {
+            border-color: var(--blue);
+            background: rgba(74,144,196,0.07);
+        }
+
+        .hp-label {
+            font-size: 0.58rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--blue-light);
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+
+        .hp-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* SHARED */
+        .section-wrap {
+            padding: 92px 64px;
+        }
+
+        .section-wrap.light { background: #fff; }
+        .section-wrap.alt { background: var(--bg-2); }
+        .section-wrap.dark { background: var(--navy); }
+        .section-wrap.navy-mid { background: var(--navy-mid); }
+
+        .section-label {
+            font-size: 0.58rem;
+            font-weight: 600;
+            letter-spacing: 0.38em;
+            text-transform: uppercase;
+            color: var(--blue);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+
+        .section-label::before {
+            content: '';
+            display: block;
+            width: 28px;
+            height: 1.5px;
+            background: var(--blue);
+        }
+
+        .dark .section-label, .navy-mid .section-label { color: var(--blue-light); }
+        .dark .section-label::before, .navy-mid .section-label::before { background: var(--blue-light); }
+
+        h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 3.5vw, 3.1rem);
+            font-weight: 300;
+            line-height: 1.12;
+            color: var(--navy);
+            margin-bottom: 18px;
+        }
+
+        h2 em {
+            font-style: italic;
+            color: var(--blue);
+        }
+
+        .dark h2, .navy-mid h2 { color: #fff; }
+        .dark h2 em, .navy-mid h2 em { color: var(--blue-light); }
+
+        .body-text {
+            font-size: 0.85rem;
+            font-weight: 300;
+            line-height: 1.95;
+            color: var(--muted);
+        }
+
+        .dark .body-text, .navy-mid .body-text { color: rgba(255,255,255,0.48); }
+
+        .blue-rule {
+            width: 40px;
+            height: 2px;
+            background: var(--blue);
+            margin: 18px 0;
+        }
+
+        .dark .blue-rule { background: var(--blue-light); opacity: 0.5; }
+
+        /* ABOUT / PHILOSOPHY */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 72px;
+            align-items: start;
+        }
+
+        .three-col {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--blue-border);
+            border: 1.5px solid var(--blue-border);
+        }
+
+        .value-card {
+            background: #fff;
+            padding: 36px 30px;
+            transition: background 0.3s;
+        }
+
+        .value-card:hover { background: var(--bg-2); }
+
+        .value-icon {
+            font-size: 1.5rem;
+            color: var(--blue);
+            margin-bottom: 14px;
+        }
+
+        .value-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--navy);
+            margin-bottom: 10px;
+        }
+
+        .value-text {
+            font-size: 0.79rem;
+            font-weight: 300;
+            line-height: 1.85;
+            color: var(--muted);
+        }
+
+        /* FOCUS */
+        .focus-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.08);
+            margin-top: 48px;
+        }
+
+        .focus-card {
+            background: rgba(255,255,255,0.02);
+            padding: 36px 32px;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.3s;
+        }
+
+        .focus-card:hover { background: rgba(74,144,196,0.09); }
+
+        .focus-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--blue-light);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s;
+        }
+
+        .focus-card:hover::after { transform: scaleX(1); }
+
+        .focus-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.04);
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+
+        .focus-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .focus-text {
+            font-size: 0.79rem;
+            font-weight: 300;
+            line-height: 1.85;
+            color: rgba(255,255,255,0.45);
+        }
+
+        .focus-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 16px;
+        }
+
+        .focus-tag {
+            font-size: 0.58rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--blue-light);
+            border: 1px solid rgba(106,173,217,0.25);
+            padding: 3px 9px;
+        }
+
+        /* APPROACH */
+        .approach-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            margin-top: 48px;
+            position: relative;
+        }
+
+        .approach-steps::before {
+            content: '';
+            position: absolute;
+            top: 28px;
+            left: 12%;
+            right: 12%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(74,144,196,0.3), transparent);
+        }
+
+        .approach-step {
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .a-dot-wrap {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 22px;
+        }
+
+        .a-dot {
+            width: 56px;
+            height: 56px;
+            border: 1.5px solid var(--blue-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            position: relative;
+            z-index: 1;
+        }
+
+        .a-dot-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 300;
+            color: var(--blue);
+            line-height: 1;
+        }
+
+        .a-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--navy);
+            margin-bottom: 8px;
+        }
+
+        .a-text {
+            font-size: 0.75rem;
+            font-weight: 300;
+            line-height: 1.8;
+            color: var(--muted);
+        }
+
+        /* TEAM */
+        .team-founders {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 28px;
+        }
+
+        .founder-card {
+            background: var(--navy);
+            position: relative;
+            overflow: hidden;
+            padding: 48px 40px;
+            border: 1px solid rgba(74,144,196,0.15);
+        }
+
+        .founder-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(to right, var(--blue), var(--blue-light));
+        }
+
+        .founder-card-bg {
+            position: absolute;
+            bottom: -40px;
+            right: -40px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(74,144,196,0.07) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .founder-initial {
+            width: 80px;
+            height: 80px;
+            border: 1.5px solid rgba(74,144,196,0.4);
+            background: rgba(74,144,196,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 300;
+            color: var(--blue-light);
+            margin-bottom: 24px;
+            border-radius: 50%;
+        }
+
+        .founder-badge {
+            display: inline-block;
+            font-size: 0.52rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            background: var(--blue);
+            color: #fff;
+            padding: 3px 9px;
+            margin-bottom: 12px;
+        }
+
+        .founder-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: #fff;
+            margin-bottom: 3px;
+        }
+
+        .founder-title {
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--blue-light);
             margin-bottom: 20px;
         }
-        
-        .form-group label {
+
+        .founder-bio {
+            font-size: 0.8rem;
+            font-weight: 300;
+            line-height: 1.9;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .founder-bio + .founder-bio { margin-top: 12px; }
+
+        /* CRITERIA */
+        .criteria-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 48px;
+        }
+
+        .criteria-card {
+            border: 1.5px solid var(--blue-border);
+            background: #fff;
+            padding: 28px 24px 28px 28px;
+            position: relative;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .criteria-card:hover {
+            border-color: rgba(74,144,196,0.45);
+            box-shadow: 0 4px 20px rgba(74,144,196,0.07);
+        }
+
+        .criteria-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--blue);
+        }
+
+        .criteria-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--navy);
+            margin-bottom: 6px;
+        }
+
+        .criteria-text {
+            font-size: 0.79rem;
+            font-weight: 300;
+            line-height: 1.82;
+            color: var(--muted);
+        }
+
+        /* CONTACT */
+        .contact-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 72px;
+            align-items: start;
+        }
+
+        .contact-body {
+            font-size: 0.86rem;
+            font-weight: 300;
+            line-height: 1.95;
+            color: var(--muted);
+            margin-bottom: 28px;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .contact-row {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .contact-icon {
+            width: 34px;
+            height: 34px;
+            border: 1px solid var(--blue-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.82rem;
+            color: var(--blue);
+            background: rgba(74,144,196,0.05);
+            flex-shrink: 0;
+        }
+
+        .contact-txt {
+            font-size: 0.81rem;
+            color: var(--muted);
+        }
+
+        .contact-txt strong {
             display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #333;
+            font-size: 0.57rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--blue);
+            font-weight: 500;
+            margin-bottom: 1px;
         }
-        
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: border-color 0.3s ease;
+
+        .sister-note {
+            margin-top: 28px;
+            padding: 18px 20px 18px 24px;
+            background: rgba(74,144,196,0.06);
+            border: 1px solid rgba(74,144,196,0.22);
+            border-left: 3px solid var(--blue);
+            font-size: 0.78rem;
+            font-weight: 300;
+            line-height: 1.8;
+            color: var(--muted);
         }
-        
-        .form-group input:focus,
-        .form-group select:focus {
+
+        .sister-note strong {
+            color: var(--navy);
+            font-weight: 500;
+            display: block;
+            margin-bottom: 3px;
+            font-size: 0.82rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .fgrp {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .fgrp label {
+            font-size: 0.57rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--blue);
+            font-weight: 500;
+        }
+
+        .fgrp input, .fgrp select, .fgrp textarea {
+            background: #fff;
+            border: 1.5px solid var(--blue-border);
+            padding: 11px 13px;
+            color: var(--text);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 300;
             outline: none;
-            border-color: #667eea;
+            transition: border-color 0.3s;
+            resize: vertical;
         }
-        
-        .calculate-btn {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
-            color: white;
-            padding: 15px 30px;
+
+        .fgrp input::placeholder, .fgrp textarea::placeholder {
+            color: rgba(107,140,174,0.4);
+        }
+
+        .fgrp input:focus, .fgrp select:focus, .fgrp textarea:focus {
+            border-color: var(--blue);
+        }
+
+        .fgrp select option {
+            background: #fff;
+            color: var(--text);
+        }
+
+        .btn-submit {
+            font-size: 0.67rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            padding: 14px 32px;
+            background: var(--blue);
+            color: #fff;
             border: none;
-            border-radius: 25px;
-            font-size: 16px;
-            font-weight: bold;
             cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            transition: background 0.3s;
             width: 100%;
-            transition: all 0.3s ease;
+            margin-top: 4px;
         }
-        
-        .calculate-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
-        }
-        
-        .results {
-            display: none;
-            margin-top: 30px;
-            padding: 20px;
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-            border-radius: 10px;
-            text-align: center;
-        }
-        
-        .results h3 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-        }
-        
-        .result-item {
-            margin: 10px 0;
-            font-size: 18px;
-            font-weight: bold;
-            color: #34495e;
-        }
-        
-        /* Regional Offices */
-        .offices {
-            padding: 4rem 0;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-        }
-        
-        .office-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        
-        .office-card {
-            background: rgba(255,255,255,0.1);
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-        
-        .office-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .office-card p {
-            opacity: 0.9;
-        }
-        
-        /* Footer */
+
+        .btn-submit:hover { background: var(--blue-dark); }
+
+        /* FOOTER */
         footer {
-            background: #2c3e50;
-            color: white;
-            padding: 3rem 0 2rem;
-            text-align: center;
+            background: #080F18;
+            border-top: 1px solid rgba(74,144,196,0.15);
+            padding: 32px 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
         }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
-        
-        .footer-section h3 {
-            margin-bottom: 1rem;
+
+        .footer-logo {
+            height: 32px;
+            width: auto;
+            filter: brightness(0) invert(1);
+            opacity: 0.6;
         }
-        
-        .footer-bottom {
-            border-top: 1px solid #34495e;
-            padding-top: 2rem;
-            margin-top: 2rem;
+
+        .footer-brand-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: rgba(255,255,255,0.4);
+            border-left: 1px solid rgba(255,255,255,0.12);
+            padding-left: 12px;
+            letter-spacing: 0.06em;
         }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .locations {
-                justify-content: center;
-                margin-top: 10px;
-            }
-            
-            .header-content {
-                text-align: center;
-            }
+
+        .footer-copy {
+            font-size: 0.6rem;
+            color: rgba(255,255,255,0.25);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .footer-links a {
+            font-size: 0.6rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.25);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover { color: var(--blue-light); }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(22px);
+            transition: opacity 0.65s ease, transform 0.65s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
         }
     </style>
 </head>
+
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">McNath Capital Group</div>
-                <div class="locations">
-                    <div class="location">📍 New York</div>
-                    <div class="location">📍 Chicago</div>
-                    <div class="location">📍 Los Angeles</div>
-                    <div class="location">📍 Miami</div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1>America's Business Capital Specialists</h1>
-            <p>Free calculators and expert capital advisory from coast to coast</p>
-            <a href="#calculators" class="cta-button">Try Our Free Calculators</a>
-        </div>
-    </section>
-
-    <!-- Calculator Section -->
-    <section id="calculators" class="calculators">
-        <div class="container">
-            <h2 class="section-title">Free Business Calculators</h2>
-            <p style="text-align: center; font-size: 1.1rem; color: #666; max-width: 800px; margin: 0 auto;">
-                Get instant insights with our professional-grade calculators. Used by thousands of business owners nationwide.
-            </p>
-            
-            <div class="calculator-grid">
-                <div class="calculator-card">
-                    <div class="calculator-icon">💰</div>
-                    <h3>SBA Loan Calculator</h3>
-                    <p>Calculate monthly payments and see if you qualify for SBA financing. Covers 7(a), 504, and microloans.</p>
-                    <button class="calc-button" onclick="openCalculator('sba')">Calculate SBA Loan</button>
-                </div>
-                
-                <div class="calculator-card">
-                    <div class="calculator-icon">📊</div>
-                    <h3>Business Valuation Calculator</h3>
-                    <p>Estimate your business value using proven valuation methods. Essential for exit planning and M&A.</p>
-                    <button class="calc-button" onclick="openCalculator('valuation')">Value My Business</button>
-                </div>
-                
-                <div class="calculator-card">
-                    <div class="calculator-icon">📈</div>
-                    <h3>Profit Margin Calculator</h3>
-                    <p>Analyze your profitability and compare against industry benchmarks. Identify optimization opportunities.</p>
-                    <button class="calc-button" onclick="openCalculator('profit')">Calculate Margins</button>
-                </div>
-                
-                <div class="calculator-card">
-                    <div class="calculator-icon">🏦</div>
-                    <h3>DSCR Calculator</h3>
-                    <p>Determine your Debt Service Coverage Ratio for loan qualification and financial health assessment.</p>
-                    <button class="calc-button" onclick="openCalculator('dscr')">Calculate DSCR</button>
-                </div>
-                
-                <div class="calculator-card">
-                    <div class="calculator-icon">🚀</div>
-                    <h3>Exit Readiness Calculator</h3>
-                    <p>Assess your business readiness for sale or acquisition. Get a comprehensive exit planning score.</p>
-                    <button class="calc-button" onclick="openCalculator('exit')">Check Exit Readiness</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Regional Offices -->
-    <section class="offices">
-        <div class="container">
-            <h2 class="section-title">National Network, Local Expertise</h2>
-            <div class="office-grid">
-                <div class="office-card">
-                    <h3>🗽 New York</h3>
-                    <p>Wall Street connections, investment banking relationships, and Fortune 500 expertise in the financial capital of America.</p>
-                </div>
-                <div class="office-card">
-                    <h3>🏭 Chicago</h3>
-                    <p>Manufacturing and distribution capital expertise, serving the industrial heartland with specialized financing solutions.</p>
-                </div>
-                <div class="office-card">
-                    <h3>🌴 Los Angeles</h3>
-                    <p>Technology and entertainment industry specialization, connecting innovators with growth capital on the West Coast.</p>
-                </div>
-                <div class="office-card">
-                    <h3>🏖️ Miami</h3>
-                    <p>International business and emerging market access, gateway to Latin America and global trade opportunities.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Services</h3>
-                    <p>SBA Lending<br>Business Valuations<br>M&A Advisory<br>Capital Planning</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Industries</h3>
-                    <p>Manufacturing<br>Technology<br>Healthcare<br>Professional Services</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Locations</h3>
-                    <p>New York • Chicago<br>Los Angeles • Miami<br>Serving All 50 States</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 McNath Capital Group. All rights reserved. | America's Business Capital Specialists</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Calculator Modals -->
-    <div id="sbaModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>🏦 SBA Loan Calculator</h2>
-            <form class="calc-form" onsubmit="calculateSBA(event)">
-                <div class="form-group">
-                    <label>Email Address:</label>
-                    <input type="email" id="sbaEmail" required>
-                </div>
-                <div class="form-group">
-                    <label>Company Name:</label>
-                    <input type="text" id="sbaCompany" required>
-                </div>
-                <div class="form-group">
-                    <label>Annual Revenue:</label>
-                    <select id="sbaRevenue" required>
-                        <option value="">Select Revenue Range</option>
-                        <option value="under500k">Under $500K</option>
-                        <option value="500k-1m">$500K - $1M</option>
-                        <option value="1m-5m">$1M - $5M</option>
-                        <option value="5m-25m">$5M - $25M</option>
-                        <option value="over25m">Over $25M</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Loan Amount Needed:</label>
-                    <input type="number" id="sbaLoanAmount" placeholder="500000" required>
-                </div>
-                <div class="form-group">
-                    <label>Loan Purpose:</label>
-                    <select id="sbaUse" required>
-                        <option value="">Select Purpose</option>
-                        <option value="acquisition">Business Acquisition</option>
-                        <option value="expansion">Business Expansion</option>
-                        <option value="equipment">Equipment Purchase</option>
-                        <option value="realestate">Real Estate</option>
-                        <option value="working">Working Capital</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Preferred Region:</label>
-                    <select id="sbaRegion">
-                        <option value="any">Any Location</option>
-                        <option value="nyc">New York</option>
-                        <option value="chicago">Chicago</option>
-                        <option value="la">Los Angeles</option>
-                        <option value="miami">Miami</option>
-                    </select>
-                </div>
-                <button type="submit" class="calculate-btn">Calculate SBA Payment</button>
-            </form>
-            <div id="sbaResults" class="results">
-                <h3>Your SBA Loan Analysis</h3>
-                <div id="sbaOutput"></div>
-                <p style="margin-top: 20px; font-size: 14px; color: #666;">
-                    Results saved and our regional team will follow up within 24 hours with next steps.
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <div id="valuationModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>📊 Business Valuation Calculator</h2>
-            <form class="calc-form" onsubmit="calculateValuation(event)">
-                <div class="form-group">
-                    <label>Email Address:</label>
-                    <input type="email" id="valEmail" required>
-                </div>
-                <div class="form-group">
-                    <label>Company Name:</label>
-                    <input type="text" id="valCompany" required>
-                </div>
-                <div class="form-group">
-                    <label>Annual Revenue:</label>
-                    <input type="number" id="valRevenue" placeholder="2000000" required>
-                </div>
-                <div class="form-group">
-                    <label>Annual Profit (EBITDA):</label>
-                    <input type="number" id="valProfit" placeholder="400000" required>
-                </div>
-                <div class="form-group">
-                    <label>Industry:</label>
-                    <select id="valIndustry" required>
-                        <option value="">Select Industry</option>
-                        <option value="manufacturing">Manufacturing</option>
-                        <option value="technology">Technology</option>
-                        <option value="healthcare">Healthcare</option>
-                        <option value="professional">Professional Services</option>
-                        <option value="retail">Retail</option>
-                        <option value="construction">Construction</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Valuation Purpose:</label>
-                    <select id="valPurpose" required>
-                        <option value="">Select Purpose</option>
-                        <option value="sale">Planning to Sell</option>
-                        <option value="planning">Strategic Planning</option>
-                        <option value="acquisition">Potential Acquisition</option>
-                        <option value="financing">Financing/Investment</option>
-                        <option value="curious">Just Curious</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Preferred Region:</label>
-                    <select id="valRegion">
-                        <option value="any">Any Location</option>
-                        <option value="nyc">New York</option>
-                        <option value="chicago">Chicago</option>
-                        <option value="la">Los Angeles</option>
-                        <option value="miami">Miami</option>
-                    </select>
-                </div>
-                <button type="submit" class="calculate-btn">Value My Business</button>
-            </form>
-            <div id="valuationResults" class="results">
-                <h3>Your Business Valuation</h3>
-                <div id="valuationOutput"></div>
-                <p style="margin-top: 20px; font-size: 14px; color: #666;">
-                    Results saved and our M&A team will follow up within 24 hours with detailed analysis.
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <div id="profitModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>📈 Profit Margin Calculator</h2>
-            <form class="calc-form" onsubmit="calculateProfit(event)">
-                <div class="form-group">
-                    <label>Email Address:</label>
-                    <input type="email" id="profitEmail" required>
-                </div>
-                <div class="form-group">
-                    <label>Company Name:</label>
-                    <input type="text" id="profitCompany" required>
-                </div>
-                <div class="form-group">
-                    <label>Annual Revenue:</label>
-                    <input type="number" id="profitRevenue" placeholder="1000000" required>
-                </div>
-                <div class="form-group">
-                    <label>Cost of Goods Sold (COGS):</label>
-                    <input type="number" id="profitCOGS" placeholder="600000" required>
-                </div>
-                <div class="form-group">
-                    <label>Operating Expenses:</label>
-                    <input type="number" id="profitOpex" placeholder="250000" required>
-                </div>
-                <div class="form-group">
-                    <label>Industry:</label>
-                    <select id="profitIndustry" required>
-                        <option value="">Select Industry</option>
-                        <option value="manufacturing">Manufacturing</option>
-                        <option value="technology">Technology</option>
-                        <option value="healthcare">Healthcare</option>
-                        <option value="professional">Professional Services</option>
-                        <option value="retail">Retail</option>
-                        <option value="construction">Construction</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-                <button type="submit" class="calculate-btn">Calculate Profit Margins</button>
-            </form>
-            <div id="profitResults" class="results">
-                <h3>Your Profit Analysis</h3>
-                <div id="profitOutput"></div>
-                <p style="margin-top: 20px; font-size: 14px; color: #666;">
-                    Results saved and our advisory team will follow up with optimization recommendations.
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Calculator functionality
-        function openCalculator(type) {
-            const modal = document.getElementById(type + 'Modal');
-            modal.style.display = 'block';
-        }
-
-        // Close modal functionality
-        document.querySelectorAll('.close').forEach(closeBtn => {
-            closeBtn.onclick = function() {
-                this.closest('.modal').style.display = 'none';
-            }
-        });
-
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal')) {
-                event.target.style.display = 'none';
-            }
-        }
-
-        function calculateSBA(event) {
-            event.preventDefault();
-            
-            const loanAmount = parseFloat(document.getElementById('sbaLoanAmount').value);
-            const email = document.getElementById('sbaEmail').value;
-            const company = document.getElementById('sbaCompany').value;
-            const revenue = document.getElementById('sbaRevenue').value;
-            const use = document.getElementById('sbaUse').value;
-            const region = document.getElementById('sbaRegion').value;
-            
-            // SBA 7(a) typical terms: 6.5-11% interest, 10-25 year terms
-            const interestRate = 0.08; // 8% average
-            const termYears = loanAmount > 1000000 ? 20 : 15;
-            const termMonths = termYears * 12;
-            const downPayment = loanAmount * 0.1; // 10% down typical
-            
-            const monthlyRate = interestRate / 12;
-            const monthlyPayment = (loanAmount - downPayment) * (monthlyRate * Math.pow(1 + monthlyRate, termMonths)) / (Math.pow(1 + monthlyRate, termMonths) - 1);
-            
-            document.getElementById('sbaOutput').innerHTML = `
-                <div class="result-item">💰 Loan Amount: $${loanAmount.toLocaleString()}</div>
-                <div class="result-item">💵 Down Payment: $${downPayment.toLocaleString()}</div>
-                <div class="result-item">📅 Monthly Payment: $${monthlyPayment.toLocaleString()}</div>
-                <div class="result-item">⏱️ Term: ${termYears} years</div>
-                <div class="result-item">📊 Interest Rate: ~${(interestRate * 100).toFixed(1)}%</div>
-            `;
-            
-            document.getElementById('sbaResults').style.display = 'block';
-            
-            // Save to spreadsheet (simulate)
-            console.log('SBA Lead:', { email, company, revenue, loanAmount, use, region, monthlyPayment });
-            
-            // In real implementation, this would submit to Google Sheets
-            submitToSpreadsheet('SBA Calculator', {
-                email, company, revenue, loanAmount, use, region, 
-                monthlyPayment: Math.round(monthlyPayment)
-            });
-        }
-
-        function calculateValuation(event) {
-            event.preventDefault();
-            
-            const email = document.getElementById('valEmail').value;
-            const company = document.getElementById('valCompany').value;
-            const revenue = parseFloat(document.getElementById('valRevenue').value);
-            const profit = parseFloat(document.getElementById('valProfit').value);
-            const industry = document.getElementById('valIndustry').value;
-            const purpose = document.getElementById('valPurpose').value;
-            const region = document.getElementById('valRegion').value;
-            
-            // Industry multipliers
-            const multipliers = {
-                'technology': { min: 4, max: 8 },
-                'healthcare': { min: 3, max: 6 },
-                'professional': { min: 2, max: 4 },
-                'manufacturing': { min: 3, max: 5 },
-                'retail': { min: 1, max: 3 },
-                'construction': { min: 2, max: 4 },
-                'other': { min: 2, max: 4 }
-            };
-            
-            const mult = multipliers[industry] || multipliers['other'];
-            const lowValue = profit * mult.min;
-            const highValue = profit * mult.max;
-            const avgValue = (lowValue + highValue) / 2;
-            
-            document.getElementById('valuationOutput').innerHTML = `
-                <div class="result-item">📊 Estimated Value Range: $${lowValue.toLocaleString()} - $${highValue.toLocaleString()}</div>
-                <div class="result-item">🎯 Average Estimate: $${avgValue.toLocaleString()}</div>
-                <div class="result-item">📈 Revenue Multiple: ${(avgValue/revenue).toFixed(1)}x</div>
-                <div class="result-item">💰 EBITDA Multiple: ${(avgValue/profit).toFixed(1)}x</div>
-            `;
-            
-            document.getElementById('valuationResults').style.display = 'block';
-            
-            console.log('Valuation Lead:', { email, company, revenue, profit, industry, purpose, region, avgValue });
-            
-            submitToSpreadsheet('Business Valuation', {
-                email, company, revenue, profit, industry, purpose, region,
-                estimatedValue: Math.round(avgValue)
-            });
-        }
-
-        function calculateProfit(event) {
-            event.preventDefault();
-            
-            const email = document.getElementById('profitEmail').value;
-            const company = document.getElementById('profitCompany').value;
-            const revenue = parseFloat(document.getElementById('profitRevenue').value);
-            const cogs = parseFloat(document.getElementById('profitCOGS').value);
-            const opex = parseFloat(document.getElementById('profitOpex').value);
-            const industry = document.getElementById('profitIndustry').value;
-            
-            const grossProfit = revenue - cogs;
-            const netProfit = grossProfit - opex;
-            const grossMargin = (grossProfit / revenue) * 100;
-            const netMargin = (netProfit / revenue) * 100;
-            
-            // Industry benchmarks
-            const benchmarks = {
-                'technology': 75,
-                'healthcare': 35,
-                'professional': 45,
-                'manufacturing': 25,
-                'retail': 20,
-                'construction': 30,
-                'other': 25
-            };
-            
-            const benchmark = benchmarks[industry] || 25;
-            const vs_benchmark = grossMargin > benchmark ? 'Above' : 'Below';
-            
-            document.getElementById('profitOutput').innerHTML = `
-                <div class="result-item">💰 Gross Profit: $${grossProfit.toLocaleString()}</div>
-                <div class="result-item">📊 Gross Margin: ${grossMargin.toFixed(1)}%</div>
-                <div class="result-item">📈 Net Profit: $${netProfit.toLocaleString()}</div>
-                <div class="result-item">🎯 Net Margin: ${netMargin.toFixed(1)}%</div>
-                <div class="result-item">📋 Industry Benchmark: ${benchmark}% (${vs_benchmark} Average)</div>
-            `;
-            
-            document.getElementById('profitResults').style.display = 'block';
-            
-            console.log('Profit Lead:', { email, company, revenue, cogs, opex, industry, grossMargin, netMargin });
-            
-            submitToSpreadsheet('Profit Margin', {
-                email, company, revenue, industry,
-                grossMargin: grossMargin.toFixed(1),
-                netMargin: netMargin.toFixed(1)
-            });
-        }
-
-        function submitToSpreadsheet(calculatorType, data) {
-            // This will be replaced with actual Google Sheets integration
-            // For now, just log to console
-            console.log(`Submitting ${calculatorType} lead:`, {
-                timestamp: new Date().toISOString(),
-                calculatorType: calculatorType,
-                ...data
-            });
-            
-            // In real implementation:
-            // - Submit to Formspree or Google Forms
-            // - Data automatically populates Knox-managed spreadsheet
-            // - Lead gets prioritized and tracked
-        }
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+    <!-- NAV -->
+    <nav id="nav">
+        <div class="nav-brand">
+            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAWtB9ADASIAAhEBAxEB/8QAHAABAAMBAQEBAQAAAAAAAAAAAAYHCAUDBAIB/8QAVxABAAECAwEFDxIEBQMDBQEBAAECAwQFBhEXCBI2dBUXITFBUVJUYZGSsbLB0RMVIjQ3RlNVcXJzgYSTlKHD0iMyNUIWQ2KzwjN1giSi8CVEY4PhVvH/2AAbAQEAAgMBAQAAAAAAAAAAAAAABQYDBAcCAf/EADgRAQABAQMJBgQHAAMBAQAAAAABAgMEBREVNFFxkaGx4SExMjNSgRQWQVMTFCJhwdHwBiNC8UP/2gAMAwEAAhEDEQA/ANlgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA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
